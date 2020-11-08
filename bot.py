@@ -13,6 +13,7 @@ bot = telebot.TeleBot(config.TOKEN)
 starting_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
 starting_keyboard.add(types.KeyboardButton(text='Да'))
 starting_keyboard.add(types.KeyboardButton(text='Нет'))
+starting_keyboard.add(types.KeyboardButton(text='Я не алё, я Мурат'))
 starting_keyboard.add(types.KeyboardButton(text='...'))
 
 timetable_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -38,8 +39,11 @@ def send_text(message):
     elif message.text.lower() == 'нет':
         bot.send_photo(message.chat.id, photo=open('media/bruh.jpg', 'rb'))
         bot.send_message(message.chat.id, "Че ты здесь забыл тогда ТШОРТ !?")
+    elif message.text == 'Я не алё, я Мурат':
+        while True:
+            bot.send_message(message.chat.id, "ИДИ ДЗ ДЕЛАЙ")
     elif message.text.lower() == '...':
-        #bot.send_audio(message.chat.id, audio=open('media/ya.mp3', 'rb'))
+        # bot.send_audio(message.chat.id, audio=open('media/ya.mp3', 'rb'))
         bot.send_message(message.chat.id, "Да кто такой это ваше многоточие...")
 
 
@@ -55,6 +59,7 @@ def send_text(message):
     elif message.text.lower() == 'назад':
         bot.send_message(message.chat.id, "Отправляю назад !")
         bot.send_message(message.chat.id, 'Анзор ?', reply_markup=starting_keyboard)
+
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def process_message(message):
